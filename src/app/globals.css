@@ -1,0 +1,44 @@
+.inputText {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+}
+
+.photoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 65vh;
+  background-color: beige;
+  flex-direction: column;
+}
+
+.bodyContainer {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: azure;
+  border-radius: 10px;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+}
+
+.photoWrapper {
+  width: 20vw;
+  height: 30vh;
+  background-color: lightblue;
+}
+
+button {
+  padding: 8px 14px;
+  border-radius: 5px;
+  margin: 15px;
+  border: none;
+  cursor: pointer;
+}
