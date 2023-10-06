@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPhotos } from "./action";
 
@@ -7,14 +7,24 @@ function App() {
 
   const { data, error, status } = useSelector((state) => state.post);
 
+  const [url, setUrl] = useState();
+
+  const [query, setQuery] = useState("");
+
   const handlePhotos = () => {
-    dispatch(getPhotos());
+    dispatch(getPhotos({ query }));
   };
 
   const handleData = () => {
     dispatch(getPhotos());
-    console.log(data);
+
+    setUrl(data?.photos[0]?.src?.large);
+    // console.log(data?.photos[0]?.src?.small);
   };
+
+  if (status === "error") {
+    return <h1>Something Went Wrong</h1>;
+  }
 
   if (status === "loading") {
     return <h1>Loading ...</h1>;
@@ -26,16 +36,27 @@ function App() {
 
   return (
     <div className="bodyContainer">
-      <h1>Photo Search App</h1>
+      <div className="coverLine1">
+        <div className="coverLine2">
+          <h1>Photo Search App</h1>
 
-      <div className="photoContainer">
-        <input type="text" placeholder="Search Photo" className="inputText" />
+          <div className="photoContainer">
+            <input
+              type="text"
+              placeholder="Search Photo"
+              className="inputText"
+              onChange={(e) => setQuery(e.target.value)}
+            />
 
-        <button onClick={handlePhotos}>Search Photos</button>
+            <button onClick={handlePhotos}>Search Photos</button>
 
-        <button onClick={handleData}>Get Photos</button>
+            <button onClick={handleData}>Get Photos</button>
 
-        <div className="photoWrapper"></div>
+            {data && (
+              <div className="photoWrapper">{url && <img src={url}></img>}</div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
